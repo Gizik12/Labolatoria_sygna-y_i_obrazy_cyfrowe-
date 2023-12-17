@@ -3,7 +3,7 @@ from skimage import io
 from scipy import ndimage
 import matplotlib.pyplot as plt
 
-image = io.imread(r"Bayer/circle.jpg")
+image = io.imread(r"Bayer/namib.jpg")
 
 print(image.shape)
 demosaicking_convolution_mask = np.dstack([np.ones([2, 2]), 0.5 * np.ones([2, 2]), np.ones([2, 2])]) # R G B

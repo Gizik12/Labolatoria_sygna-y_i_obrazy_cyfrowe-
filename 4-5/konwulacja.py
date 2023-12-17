@@ -4,7 +4,7 @@ from scipy.ndimage import convolve
 import matplotlib.pyplot as plt
 
 # Oryginalny obraz
-image = io.imread(r"grzyb.jpg")
+image = io.imread(r"easy_shape.png")
 print(image.shape)
 plt.imshow(image)
 plt.title("Orginal Image")
@@ -12,7 +12,7 @@ plt.show(block=False)
 plt.pause(5)
 plt.close()
 
-# Rozmywanie krawędzi przyyciu jądra Laplace
+# Wykrywanie krawędzi przy użciu jądra Laplace
 laplace_filter = np.array([[0, 1, 0], [1, -4, 1], [0, 1, 0]])
 
 laplace_image = np.dstack([
