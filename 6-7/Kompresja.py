@@ -3,35 +3,32 @@ import matplotlib.pyplot as plt
 from scipy.fftpack import fft2, ifft2
 
 def compress(image, compression_ratio):
-    # Wykonaj dyskretną transformację Fouriera
+    # Dyskretna transformacja Fouriera
     image_fft = fft2(image)
-    
-    # Ustal granicę odcięcia na podstawie współczynnika kompresji
     threshold = np.percentile(np.abs(image_fft), compression_ratio)
-    
-    # Wyzeruj współczynniki poniżej progu
     image_fft[np.abs(image_fft) < threshold] = 0
     
-    # Wykonaj odwrotną transformację Fouriera
+    # Odwrotna transformacja Fouriera
     compressed_image = np.real(ifft2(image_fft))
     
     return compressed_image
 
 def main():
-    # Wczytaj obraz w odcieniach szarości (przykład)
+    # Wczytanie obrazu w odcieniach szarości
     original_image = plt.imread('image.png')
-    gray_image = np.mean(original_image, axis=-1)  # Konwersja do obrazu szaro-skalowego
+    # Konwersja do obrazu szaro-skalowego
+    gray_image = np.mean(original_image, axis=-1)
 
-    # Wyświetl oryginalny obraz
+    # Wyświetlanie orginalnego obrazu
     plt.subplot(1, 2, 1)
     plt.imshow(gray_image, cmap='gray')
     plt.title('Oryginalny obraz')
 
-    # Skompresuj obraz z wybranym współczynnikiem kompresji (np. 95%)
-    compression_ratio = 95
+    # Skompresowany obraz z wybranym współczynnikiem kompresji(%)
+    compression_ratio = 90
     compressed_image = compress(gray_image, compression_ratio)
 
-    # Wyświetl skompresowany obraz
+    # Wyświetlanie skompresowany obrazu
     plt.subplot(1, 2, 2)
     plt.imshow(compressed_image, cmap='gray')
     plt.title(f'Skompresowany obraz ({compression_ratio}% kompresji)')
